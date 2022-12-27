@@ -33,13 +33,13 @@ const Withdraw = () => {
   };
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontSize: 20}}>Available Balance</Text>
         <Text
           style={{fontSize: 38, color: 'black', fontFamily: 'Roboto-Black'}}>
           $37890.987
         </Text>
-        <View style={{marginTop: 15}}>
+        <View style={{marginTop: 30}}>
           <Text style={styles.font}>Send fund</Text>
           <View style={styles.container}>
             {renderLabel()}
@@ -79,7 +79,7 @@ const Withdraw = () => {
           <TextInput
             style={{
               borderBottomWidth: 0.8,
-              width: 370,
+              width: 350,
               borderColor: 'blue',
               backgroundColor: 'white',
               paddingVertical: -10,
@@ -92,7 +92,7 @@ const Withdraw = () => {
           <TextInput
             style={{
               borderBottomWidth: 1,
-              width: 370,
+              width: 350,
               borderColor: 'blue',
               backgroundColor: 'white',
             }}
@@ -103,7 +103,7 @@ const Withdraw = () => {
       <Button
         buttonColor="blue"
         textColor="white"
-        style={{padding: 8, width: 380, marginTop: 50, marginLeft: 15}}>
+        style={{padding: 8, marginTop: 50,marginHorizontal:10}}>
         Send
       </Button>
     </ScrollView>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,
-    width: 380,
+    width:350
   },
   icon: {
     marginRight: 5,
@@ -131,10 +131,9 @@ const styles = StyleSheet.create({
   label: {
     position: 'absolute',
     backgroundColor: 'white',
-    left: 32,
     top: 13,
     zIndex: 999,
-    paddingHorizontal: 8,
+    paddingHorizontal: 18,
     fontSize: 14,
   },
   placeholderStyle: {

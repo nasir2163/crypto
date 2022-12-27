@@ -91,7 +91,7 @@ const SendMoney = ({navigation}) => {
         <TextInput
           style={{
             borderBottomWidth: 0.8,
-            width: 370,
+            width: 350,
             borderColor: 'blue',
             backgroundColor: 'white',
             paddingVertical: -10,
@@ -104,7 +104,7 @@ const SendMoney = ({navigation}) => {
         <TextInput
           style={{
             borderBottomWidth: 1,
-            width: 370,
+            width: 350,
             borderColor: 'blue',
             backgroundColor: 'white',
           }}
@@ -116,7 +116,7 @@ const SendMoney = ({navigation}) => {
         <TextInput
           style={{
             borderBottomWidth: 1,
-            width: 370,
+            width: 350,
             borderColor: 'blue',
             backgroundColor: 'white',
           }}
@@ -126,7 +126,7 @@ const SendMoney = ({navigation}) => {
       <Button
         buttonColor="blue"
         textColor="white"
-        style={{padding: 8, width: 380, marginTop: 50, marginLeft: 15}}>
+        style={{padding: 8, width: 350, marginTop: 50}}>
         Send
       </Button>
     </View>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,
-    width: 380,
+    width: 350,
   },
   icon: {
     marginRight: 5,

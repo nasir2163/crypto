@@ -1,3 +1,6 @@
+// import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { persistor,store } from './Redux/Store';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
@@ -25,7 +28,8 @@ import CardDetails from './components/Home/CardDetails';
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
+      {/* <PersistGate loading={null} persistor={persistor}> */}
       <NavigationContainer>
         <PaperProvider>
           <Stack.Navigator
@@ -80,7 +84,8 @@ const App = () => {
           <Footer />
         </PaperProvider>
       </NavigationContainer>
-    </>
+      {/* </PersistGate> */}
+    </Provider>
   );
 };
 

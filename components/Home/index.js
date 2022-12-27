@@ -175,8 +175,8 @@ const Home = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{marginLeft: 10}}>
-          <View style={{width: 700}}>
+        <View>
+          <View style={{width: 650}}>
             <Logo
               item={{
                 title: 'Shoping',
@@ -188,7 +188,7 @@ const Home = ({navigation}) => {
           </View>
           {slide && (
             <>
-              <View style={{width: 700}}>
+              <View style={{width: 650}}>
                 <Logo
                   item={{
                     title: 'Shoping',
@@ -198,7 +198,7 @@ const Home = ({navigation}) => {
                   }}
                 />
               </View>
-              <View style={{width: 700}}>
+              <View style={{width: 650}}>
                 <Logo
                   item={{
                     title: 'Shoping',

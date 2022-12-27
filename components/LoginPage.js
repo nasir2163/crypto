@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,62 +7,101 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setLoggedInUser,setIsLoggedIn } from '../Redux/Slice/LoginSlice';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Button} from 'react-native-paper';
-import React from 'react';
+import React, {useState} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {API_URI} from '../config';
 const LoginPage = ({navigation}) => {
-  const loginHandler = () => {
+  const [loginData, setLoginData] = useState({username: '', password: ''});
+  
+  const dispatch=useDispatch()
+
+  const loginPage = () => {
     navigation.navigate('Register');
   };
+
+  const loginHandler = async () => {
+    try {
+      const res = await axios({
+        url: API_URI + '/auth/signin',
+        method: 'POST',
+        data: {...loginData},
+      });
+      if (res.status === 200) {
+        console.log('user login data', res?.data);
+        dispatch(setIsLoggedIn(true))
+        dispatch(setLoggedInUser(res?.data))
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
-    <SafeAreaView style={{backgroundColor:'white'}}>
-      <View style={{margin: 10}}>
-        <View style={styles.top}>
-          <Text>New User? </Text>
-          <TouchableOpacity onPress={loginHandler}>
-            <Text style={styles.login}>create account</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.heading1}>Log in</Text>
-        <Text style={styles.heading2}>to continue</Text>
-        <View>
-          <Text style={styles.label}>Email</Text>
-          <TextInput
-            placeholder="enter your email address"
-            style={styles.input}
-          />
-        </View>
-        <View style={{position: 'relative'}}>
-        <Text style={styles.label}>Password</Text>
-          <TextInput placeholder="enter your password" style={styles.input} />
-          <FontAwesome5
-            name="eye"
-            size={20}
-            style={{position: 'absolute', right: 10, top: '40%',color:'#1b64f5'}}
-          />
-        </View>
-        <View>
-          <Text style={{textAlign: 'right'}}>Forget Password</Text>
-          {/* <View style={{height: 100, paddingVertical: 20}}>
-              <Button title="Log in" />
-            </View> */}
-          <Button style={styles.btn}>
-            <Text style={{color: 'white',fontFamily:'Roboto-Bold'}}>Log in</Text>
-          </Button>
-          <Text style={{textAlign: 'center', marginVertical: 5}}>
-            ---------------or---------------
-          </Text>
-          <View style={styles.social}>
-            <TouchableOpacity style={styles.google}>
-              <FontAwesome5 name={'facebook'} color="#1b64f5" size={20} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.google}>
-              <FontAwesome5 name={'apple'} size={20} />
+    <KeyboardAwareScrollView
+      resetScrollToCoords={{x: 0, y: 0}}
+      scrollEnabled={false}
+      style={{backgroundColor: 'white'}}>
+      <SafeAreaView >
+        <View style={{margin: 10}}>
+          <View style={styles.top}>
+            <Text>New User? </Text>
+            <TouchableOpacity onPress={loginPage}>
+              <Text style={styles.login}>create account</Text>
             </TouchableOpacity>
           </View>
+          <Text style={styles.heading1}>Log in</Text>
+          <Text style={styles.heading2}>to continue</Text>
+          <View>
+            <Text style={[styles.label,styles.marginExtra]}>Email</Text>
+            <TextInput
+              placeholder="enter your email address"
+              style={styles.input}
+              onChangeText={txt => setLoginData({...loginData, username: txt})}
+            />
+          </View>
+          <View style={{position: 'relative'}}>
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              placeholder="enter your password"
+              style={styles.input}
+              onChangeText={txt => setLoginData({...loginData, password: txt})}
+            />
+            <FontAwesome5
+              name="eye"
+              size={20}
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: '60%',
+                color: '#1b64f5',
+              }}
+            />
+          </View>
+          <Text style={{textAlign: 'right'}}>Forget Password</Text>
+          <Button style={styles.btn} onPress={loginHandler}>
+            <Text style={{color: 'white', fontFamily: 'Roboto-Bold'}}>
+              Log in
+            </Text>
+          </Button>
+          <View>
+            <Text style={{textAlign: 'center', marginVertical: 5}}>
+              ---------------or---------------
+            </Text>
+            <View style={styles.social}>
+              <TouchableOpacity style={styles.google}>
+                <FontAwesome5 name={'facebook'} color="#1b64f5" size={20} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.google}>
+                <FontAwesome5 name={'apple'} size={20} />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -71,13 +111,13 @@ const styles = StyleSheet.create({
   heading1: {
     fontSize: 30,
     color: 'black',
-    fontFamily:'Roboto-Bold',
-    marginTop: 10,
+    fontFamily: 'Roboto-Bold',
+    marginTop: 50,
   },
   heading2: {
     fontSize: 30,
     color: 'black',
-    fontFamily:'Roboto-Bold'
+    fontFamily: 'Roboto-Bold',
   },
   input: {
     height: 40,
@@ -86,14 +126,11 @@ const styles = StyleSheet.create({
     padding: 3,
     borderBottomColor: '#1b64f5',
     fontSize: 15,
-    
-    
   },
   label: {
-    marginTop: 30,
+    marginTop: 20,
     fontSize: 15,
-    fontFamily:'Roboto-Medium'
-    
+    fontFamily: 'Roboto-Medium',
   },
   social: {
     display: 'flex',
@@ -112,7 +149,7 @@ const styles = StyleSheet.create({
   },
   login: {
     color: '#1b64f5',
-    fontFamily:'Roboto-Bold'
+    fontFamily: 'Roboto-Bold',
   },
   top: {
     display: 'flex',
@@ -125,4 +162,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 5,
   },
+  marginExtra:{
+    marginTop:50
+  }
 });

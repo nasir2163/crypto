@@ -28,7 +28,7 @@ const Dashboard = ({navigation}) => {
       <Text style={styles.heading}>Welcome to Crypto</Text>
       <Text style={styles.para}>Your Best Crypto Wallet Partner</Text>
      
-      <View style={{height: 100, marginTop: 10, width: 400, borderRadius: 5, display:'flex', alignItems:'center'}}>
+      <View style={{height: 100, marginTop: 10, borderRadius: 5, display:'flex', alignItems:'center'}}>
         <Button style={styles.btn} onPress={nextHandler}>
           <Text style={{color:'white'}}>Start Now</Text>
         </Button>

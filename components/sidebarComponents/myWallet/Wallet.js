@@ -56,7 +56,7 @@ const Wallet = ({navigation}) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                margin: 25,
+                margin: 20,
               }}>
               <Icon name={item.svg} />
               <Text
